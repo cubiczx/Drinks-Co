@@ -17,9 +17,8 @@ class OfferValidatorService implements OfferValidatorServiceInterface
      */
     public function validateOffers(): array
     {
-        // Parse files CSV and JSON
+        // Parse CSV and JSON files
         $offersCSV = $this->parseCSV("public/feed.csv");
-        //var_dump($offersCSV);
 
         // Convert JSON string to Array
         $offersJSONString = file_get_contents("public/feed.json");
@@ -27,6 +26,7 @@ class OfferValidatorService implements OfferValidatorServiceInterface
         $offersJSONString = substr($offersJSONString, 0, -3) . ']';
         $offersJSON = json_decode($offersJSONString, true);
 
+        // Merge CSV and JSON offers
         $offers = array_merge($offersCSV, $offersJSON);
 
         // Group by product_id
@@ -124,6 +124,8 @@ class OfferValidatorService implements OfferValidatorServiceInterface
     }
 
     /**
+     * Function that search offers that are above average
+     *
      * @param array $offers
      * @param array $productsAverage
      * @return array
