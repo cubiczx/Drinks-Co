@@ -49,3 +49,18 @@ You could change the name, user and password of the database in the `env` file a
 ## Local Web site
 
 [Local Web](http://localhost:8001/)
+
+## PHP container access
+
+```shell script
+$ docker-compose exec php sh
+```
+
+## Execute command
+
+1. Enter to php container
+2. Execute command:
+
+```shell script
+$ php bin/console drinks-co:offer-validator
+```
